@@ -1,4 +1,5 @@
 const db = require('../config/config');
+const crypto = require('crypto');
 
 const User = {};
 
@@ -9,6 +10,9 @@ User.getAll = () => {
 }
 
 User.createUser = (user) => {
+    //Encriptar la contraseña
+    const myPasswordHash = crypto.createHash('md5').update(user.password).digest('hex');
+    user.password = myPasswordHash;
     const sql = `INSERT INTO users(email, name, lastname, phone, image, password, created_at, updated_at)
                  VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`;
 

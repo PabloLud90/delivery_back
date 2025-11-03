@@ -1,3 +1,64 @@
+DROP TABLE IF EXISTS roles CASCADE;
+CREATE TABLE roles(
+	id BIGSERIAL PRIMARY KEY,
+	name VARCHAR(255) NOT NULL UNIQUE,
+	image VARCHAR(255) NULL,
+	route VARCHAR(255) NULL,
+	created_at TIMESTAMP(0) NOT NULL,
+	updated_at TIMESTAMP(0) NOT NULL
+);
+
+INSERT INTO roles(
+	name,
+	route,
+	created_at,
+	updated_at
+)
+VALUES(
+	'CLIENTE',
+	'client/products/list',
+	'2025-11-01',
+	'2025-11-01'
+);
+
+INSERT INTO roles(
+	name,
+	route,
+	created_at,
+	updated_at
+)
+VALUES(
+	'RESTAURANTE',
+	'restaurant/orders/list',
+	'2025-11-01',
+	'2025-11-01'
+);
+
+INSERT INTO roles(
+	name,
+	route,
+	created_at,
+	updated_at
+)
+VALUES(
+	'REPARTIDOR',
+	'delivery/orders/list',
+	'2025-11-01',
+	'2025-11-01'
+);
+
+DROP TABLE IF EXISTS user_has_roles CASCADE;
+CREATE TABLE user_has_roles(
+	user_id BIGSERIAL NOT NULL,
+	role_id BIGSERIAL NOT NULL,
+	created_at TIMESTAMP(0) NOT NULL,
+	updated_at TIMESTAMP(0) NOT NULL,
+	FOREIGN KEY(user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY(role_id) REFERENCES roles(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	PRIMARY KEY (user_id, role_id)
+);
+
+DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users(
 	id BIGSERIAL PRIMARY KEY,
 	email VARCHAR(255) NOT NULL UNIQUE,

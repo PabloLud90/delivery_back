@@ -24,7 +24,7 @@ app.set('port', port);
 //llamando a ls rutas
 users(app);
 
-server.listen(3000, '192.168.101.106' || 'localhost', function(){
+server.listen(3000, '192.168.0.116' || 'localhost', function(){
     console.log('Aplicacion de NodeJS ' + port + ' iniciada...')
 })
 

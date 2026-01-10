@@ -2,6 +2,7 @@ const User = require("../models/user");
 const Rol = require("../models/rol");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
+const storage = require("../utils/cloud_storage");
 
 module.exports = {
   async getAll(req, res, next) {
@@ -91,4 +92,41 @@ module.exports = {
       });
     }
   },
+
+  async createUserWithImage(req, res, next) {
+    try {
+      const user = JSON.parse(req.body.user);
+      console.log(`Datos enviados del usuario ${user}`);
+
+      const files = req.files;
+
+      if(files.length > 0){
+        const pathImage = `image_$(Date.now())`; //Nombre con el que se va a guardar la imagen
+        const url = await storage(files[0], pathImage);
+
+        if(url != undefined && url != nll){
+          user.image = url;
+        }
+
+      }
+
+      const data = await User.createUser(user);
+
+      await Rol.create(data.id,1); // Asignar rol por defecto "1" al usuario creado 
+
+      return res.status(201).json({
+        success: true,
+        message: "El usuario se almaceno correctamente, ahora inicie sesión",
+        data: data.id,
+      });
+    } catch (error) {
+      console.log(`Error: ${error}`);
+      return res.status(501).json({
+        success: false,
+        message: "Error al crear el usuario......",
+      });
+    }
+  },
+
+  
 };

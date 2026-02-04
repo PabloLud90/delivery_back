@@ -1,0 +1,38 @@
+# Credenciales y archivos sensibles
+serviceAccountKey.json
+*.pem
+*.key
+*.p12
+.env
+config/database.php
+config/config.php
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# Carpetas de dependencias
+/vendor/
+/node_modules/
+
+# Archivos de IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de caché de CodeIgniter
+/application/cache/*
+!/application/cache/index.html
+!/application/cache/.htaccess
+
+# Archivos subidos por usuarios
+/uploads/*
+!/uploads/index.html
+
+# Archivos temporales
+*.swp
+*.swo
+*~

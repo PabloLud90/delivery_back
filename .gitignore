@@ -4,6 +4,7 @@ serviceAccountKey.json
 *.key
 *.p12
 .env
+.keys
 config/database.php
 config/config.php
 

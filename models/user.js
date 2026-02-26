@@ -16,6 +16,7 @@ User.findUserById = (id, callback) => {
 
     return db.oneOrNone(sql, [id]).then(user =>{callback(null, user);});
 }
+//test
 
 // User.findUserByEmail = (email) => {
 //     const sql = `SELECT id, email, name, lastname, phone, image, password, session_token
